@@ -1,0 +1,85 @@
+<html>
+<head>
+<title>build.gradle</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<style type="text/css">
+.s0 { color: #bcbec4;}
+.s1 { color: #bcbec4;}
+.s2 { color: #6aab73;}
+.s3 { color: #cf8e6d;}
+.s4 { color: #2aacb8;}
+</style>
+</head>
+<body bgcolor="#1e1f22">
+<table CELLSPACING=0 CELLPADDING=5 COLS=1 WIDTH="100%" BGCOLOR="#606060" >
+<tr><td><center>
+<font face="Arial, Helvetica" color="#000000">
+build.gradle</font>
+</center></td></tr></table>
+<pre><span class="s0">plugins </span><span class="s1">{</span>
+    <span class="s0">id </span><span class="s2">'java'</span>
+<span class="s1">}</span>
+
+<span class="s0">group </span><span class="s1">= </span><span class="s2">'upgrade_final2'</span>
+<span class="s0">version </span><span class="s1">= </span><span class="s2">'1.0-SNAPSHOT'</span>
+
+<span class="s0">repositories </span><span class="s1">{</span>
+    <span class="s0">mavenCentral</span><span class="s1">()</span>
+    <span class="s0">maven </span><span class="s1">{</span>
+        <span class="s0">name </span><span class="s1">= </span><span class="s2">&quot;papermc-repo&quot;</span>
+        <span class="s0">url </span><span class="s1">= </span><span class="s2">&quot;https://repo.papermc.io/repository/maven-public/&quot;</span>
+    <span class="s1">}</span>
+    <span class="s0">maven </span><span class="s1">{</span>
+        <span class="s0">name </span><span class="s1">= </span><span class="s2">&quot;sonatype&quot;</span>
+        <span class="s0">url </span><span class="s1">= </span><span class="s2">&quot;https://oss.sonatype.org/content/groups/public/&quot;</span>
+    <span class="s1">}</span>
+<span class="s1">}</span>
+
+<span class="s0">dependencies </span><span class="s1">{</span>
+    <span class="s0">compileOnly</span><span class="s1">(</span><span class="s2">&quot;io.papermc.paper:paper-api:1.20.4-R0.1-SNAPSHOT&quot;</span><span class="s1">)</span>
+
+    <span class="s0">implementation </span><span class="s2">'com.google.code.gson:gson:2.10.1'</span>
+<span class="s1">}</span>
+
+<span class="s3">def </span><span class="s0">targetJavaVersion </span><span class="s1">= </span><span class="s4">17</span>
+<span class="s0">java </span><span class="s1">{</span>
+    <span class="s3">def </span><span class="s0">javaVersion </span><span class="s1">= </span><span class="s0">JavaVersion.toVersion</span><span class="s1">(</span><span class="s0">targetJavaVersion</span><span class="s1">)</span>
+    <span class="s0">sourceCompatibility </span><span class="s1">= </span><span class="s0">javaVersion</span>
+    <span class="s0">targetCompatibility </span><span class="s1">= </span><span class="s0">javaVersion</span>
+    <span class="s3">if </span><span class="s1">(</span><span class="s0">JavaVersion.current</span><span class="s1">() &lt; </span><span class="s0">javaVersion</span><span class="s1">) {</span>
+        <span class="s0">toolchain.languageVersion </span><span class="s1">= </span><span class="s0">JavaLanguageVersion.of</span><span class="s1">(</span><span class="s0">targetJavaVersion</span><span class="s1">)</span>
+    <span class="s1">}</span>
+<span class="s1">}</span>
+
+<span class="s0">tasks.withType</span><span class="s1">(</span><span class="s0">JavaCompile</span><span class="s1">)</span><span class="s0">.configureEach </span><span class="s1">{</span>
+    <span class="s0">options.encoding </span><span class="s1">= </span><span class="s2">'UTF-8'</span>
+
+    <span class="s3">if </span><span class="s1">(</span><span class="s0">targetJavaVersion </span><span class="s1">&gt;= </span><span class="s4">10 </span><span class="s1">|| </span><span class="s0">JavaVersion.current</span><span class="s1">()</span><span class="s0">.isJava10Compatible</span><span class="s1">()) {</span>
+        <span class="s0">options.release.set</span><span class="s1">(</span><span class="s0">targetJavaVersion</span><span class="s1">)</span>
+    <span class="s1">}</span>
+<span class="s1">}</span>
+
+<span class="s0">processResources </span><span class="s1">{</span>
+    <span class="s3">def </span><span class="s0">props </span><span class="s1">= [</span><span class="s0">version: version</span><span class="s1">]</span>
+    <span class="s0">inputs.properties props</span>
+    <span class="s0">filteringCharset </span><span class="s2">'UTF-8'</span>
+    <span class="s0">filesMatching</span><span class="s1">(</span><span class="s2">'plugin.yml'</span><span class="s1">) {</span>
+        <span class="s0">expand props</span>
+    <span class="s1">}</span>
+<span class="s1">}</span>
+
+
+<span class="s0">tasks.jar </span><span class="s1">{</span>
+    <span class="s0">archiveFileName </span><span class="s1">= </span><span class="s2">'Beacon_Plugin.jar'</span>
+    <span class="s0">destinationDirectory </span><span class="s1">= </span><span class="s0">file</span><span class="s1">(</span><span class="s2">'C:</span><span class="s3">\\</span><span class="s2">Users</span><span class="s3">\\</span><span class="s2">junju</span><span class="s3">\\</span><span class="s2">OneDrive</span><span class="s3">\\</span><span class="s2">문서</span><span class="s3">\\</span><span class="s2">ServerEngine</span><span class="s3">\\</span><span class="s2">servers</span><span class="s3">\\</span><span class="s2">server_262357919</span><span class="s3">\\</span><span class="s2">plugins'</span><span class="s1">)</span>
+<span class="s1">}</span>
+
+<span class="s0">tasks.withType</span><span class="s1">(</span><span class="s0">JavaCompile</span><span class="s1">) {</span>
+    <span class="s0">options.encoding </span><span class="s1">= </span><span class="s2">'UTF-8'</span>
+<span class="s1">}</span>
+
+<span class="s0">tasks.withType</span><span class="s1">(</span><span class="s0">Test</span><span class="s1">) {</span>
+    <span class="s0">systemProperty </span><span class="s2">'file.encoding'</span><span class="s0">, </span><span class="s2">'UTF-8'</span>
+<span class="s1">}</span></pre>
+</body>
+</html>
