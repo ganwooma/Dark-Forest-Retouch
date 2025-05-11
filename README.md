@@ -4,12 +4,6 @@ https://github.com/didi78579/-
 # 기본적인 사용법
 https://www.koreaminecraft.net/plugins/3968610
 
-# 원본 프로젝트
-https://github.com/didi78579/-
-
-# 기본적인 사용법
-https://www.koreaminecraft.net/plugins/3968610
-
 # 추가된 기능
 ### 가문별 디스코드 채널 설정
 각 가문마다 별도의 디스코드 채널을 설정할 수 있습니다
