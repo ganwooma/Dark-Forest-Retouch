@@ -1,23 +1,16 @@
 # 원본 프로젝트<br>
 https://github.com/didi78579/-
 
-
 # 기본적인 사용법
 https://www.koreaminecraft.net/plugins/3968610
 
-
-# 디스코드 봇 연동법 및 사용법# 원본 프로젝트<br>
+# 원본 프로젝트
 https://github.com/didi78579/-
 
-
 # 기본적인 사용법
 https://www.koreaminecraft.net/plugins/3968610
 
-
-
 # 추가된 기능
-주요 기능
-
 가문별 디스코드 채널 설정
 
 각 가문마다 별도의 디스코드 채널을 설정할 수 있습니다
@@ -43,13 +36,14 @@ https://www.koreaminecraft.net/plugins/3968610
 
 설정 방법
 
-config.yml 설정
-yamldiscord:
-  enabled: true
-  token: "여기에_디스코드_봇_토큰_입력"
-  default-channel-id: "기본_디스코드_채널_ID"
-  family-channels:
-    # 가문별 채널 ID는 자동으로 저장됩니다
+src/main/resource/config.yml 설정
+
+    yamldiscord:
+      enabled: true
+      token: "여기에_디스코드_봇_토큰_입력"
+      default-channel-id: "기본_디스코드_채널_ID"
+      family-channels:
+        # 가문별 채널 ID는 자동으로 저장됩니다
 
 디스코드 봇 생성 및 토큰 획득
 
