@@ -59,12 +59,10 @@ processResources {
 
 tasks.jar {
     archiveFileName = 'Beacon_Plugin.jar'
-    destinationDirectory = file('C:\\Users\\PC\\OneDrive\\바탕 화면\\')
 }
 
 shadowJar {
     archiveFileName = 'Beacon_Plugin-Full.jar'
-    destinationDirectory = file('C:\\Users\\PC\\OneDrive\\바탕 화면\\')
 
     // JDA와 관련 종속성 재배치
     relocate 'net.dv8tion.jda', 'world.world.shaded.jda'
