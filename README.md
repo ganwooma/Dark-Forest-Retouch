@@ -10,14 +10,13 @@ https://www.koreaminecraft.net/plugins/3968610
 src/main/java/resources/config.yml 에
 
 
-    discord-token: "디스코드 봇 토큰"
-    
-    channel-ids:
-        main: "디스코드 채널 ID"
-        팀장 플레이어1 의 닉네임: "디스코드 채널 ID"
-        팀장 플레이어2 의 닉네임: "디스코드 채널 ID"
-        팀장 플레이어3 의 닉네임: "디스코드 채널 ID"
-        팀장 플레이어4 의 닉네임: "디스코드 채널 ID"
+    discord:
+      enabled: true
+      token: "디스코드 토큰"
+      default-channel-id: "서버 상태를 알려줄 디스코드 채널"
+      family-channels:
+      # 각 가문별 채널 ID는 이곳에 저장됩니다
+      # 예: family_name: "채널ID"
 
 
 형식으로 사용하십시오
