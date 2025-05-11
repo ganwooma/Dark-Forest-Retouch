@@ -17,3 +17,7 @@ commands:
   discord:
     description: 디스코드 설정 명령어
     usage: /<command> <set|reload> [가문이름] [채널ID]
+  EndBlock:
+    description: 엔더 월드 진입 차단 on/off 전환
+    usage: /toggleender [on/off]
+    permission: preventender.toggle

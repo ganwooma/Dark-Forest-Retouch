@@ -13,10 +13,7 @@ import org.bukkit.event.block.BlockBreakEvent;
 import org.bukkit.event.block.BlockPistonExtendEvent;
 import org.bukkit.event.block.BlockPistonRetractEvent;
 import org.bukkit.event.block.BlockPlaceEvent;
-import org.bukkit.event.entity.EntityDamageByEntityEvent;
-import org.bukkit.event.entity.EntityDeathEvent;
-import org.bukkit.event.entity.EntityExplodeEvent;
-import org.bukkit.event.entity.EntitySpawnEvent;
+import org.bukkit.event.entity.*;
 import org.bukkit.event.player.PlayerJoinEvent;
 import org.bukkit.event.player.PlayerQuitEvent;
 import org.bukkit.event.player.PlayerRespawnEvent;
@@ -141,6 +138,16 @@ public class BeaconMain extends JavaPlugin implements Listener {
         if (discordManager != null) {
             discordManager.shutdown();
             getLogger().info("Discord connection closed!");
+        }
+    }
+
+    @EventHandler
+    public void onPlayerPickupElytra(EntityPickupItemEvent event) {
+        if (event.getEntity() instanceof Player) {
+            ItemStack item = event.getItem().getItemStack();
+            if (item.getType() == Material.ELYTRA) {
+                event.setCancelled(true); // 줍는 것만 차단
+            }
         }
     }
 
