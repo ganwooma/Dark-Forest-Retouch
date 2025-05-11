@@ -8,10 +8,6 @@ commands:
     description: Gives a beacon to the player.
     usage: /getbeacon
     aliases: [getb]
-  tpbeacon:
-    description: Teleports the player to their family's beacon.
-    usage: /tpbeacon
-    aliases: [tpb]
   start:
     description: 게임을 시작합니다.
     usage: /start

@@ -1,12 +1,12 @@
 package world.world;
 
 import org.bukkit.*;
+import org.bukkit.attribute.Attribute;
 import org.bukkit.block.Block;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandSender;
-import org.bukkit.entity.EnderCrystal;
-import org.bukkit.entity.Entity;
-import org.bukkit.entity.Player;
+import org.bukkit.configuration.file.FileConfiguration;
+import org.bukkit.entity.*;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.block.BlockBreakEvent;
@@ -20,6 +20,7 @@ import org.bukkit.event.entity.EntitySpawnEvent;
 import org.bukkit.event.player.PlayerJoinEvent;
 import org.bukkit.event.player.PlayerQuitEvent;
 import org.bukkit.event.player.PlayerRespawnEvent;
+import org.bukkit.event.player.PlayerTeleportEvent;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.plugin.PluginManager;
 import org.bukkit.plugin.java.JavaPlugin;
@@ -32,6 +33,7 @@ import java.util.*;
 import java.util.logging.Logger;
 
 public class BeaconMain extends JavaPlugin implements Listener {
+    private boolean preventEnder;
     private BanManager banManager;
     private static final int BEACON_EFFECT_RADIUS = 100;
     private static Set<String> allUsers = new HashSet<>();
@@ -46,6 +48,12 @@ public class BeaconMain extends JavaPlugin implements Listener {
 
     @Override
     public void onEnable() {
+        saveDefaultConfig();
+        FileConfiguration config = getConfig();
+        preventEnder = config.getBoolean("preventEnder", true); // 설정 파일에서 preventEnder 값을 불러옴 (기본값 true)
+
+        getServer().getPluginManager().registerEvents(this, this);
+
         getServer().getPluginManager().registerEvents(new Listener() {
             @EventHandler
             public void onJoin(PlayerJoinEvent event) {
@@ -113,6 +121,15 @@ public class BeaconMain extends JavaPlugin implements Listener {
         disableCoordinates();
     }
 
+    @EventHandler
+    public void onPlayerTeleport(PlayerTeleportEvent event) {
+        if (preventEnder && event.getTo().getWorld().getName().equals("world_the_end")) {
+            event.setCancelled(true);  // 엔더 월드로 가는 텔레포트를 막음
+            event.getPlayer().sendMessage("엔더 월드로 갈 수 없습니다!");
+        }
+    }
+
+
     @Override
     public void onDisable() {
         if (familyManager != null) {
@@ -129,27 +146,53 @@ public class BeaconMain extends JavaPlugin implements Listener {
 
     @Override
     public boolean onCommand(CommandSender sender, Command cmd, String label, String[] args) {
-        if (cmd.getName().equalsIgnoreCase("getbeacon")) {
-            if (sender instanceof Player) {
-                Player senderPlayer = (Player) sender;
+        if (sender instanceof Player) {
+            Player player = (Player) sender;
 
-                // 모든 가문을 순회
-                for (FamilyManager.Family family : FamilyManager.getAllFamilies()) {
-                    String leaderName = family.getLeader(); // 리더의 이름
-                    Player leader = Bukkit.getPlayer(leaderName);
-
-                    if (leader != null && leader.isOnline()) {
-                        leader.getInventory().addItem(new ItemStack(Material.BEACON, 1));
-                        leader.sendMessage(ChatColor.GREEN + "[알림] 당신의 가문을 위한 신호기가 지급되었습니다.");
-                    }
-                }
-                senderPlayer.sendMessage(ChatColor.YELLOW + "[관리자] 모든 가문의 대장에게 신호기를 지급했습니다.");
-            } else {
-                sender.sendMessage("이 명령어는 플레이어만 사용할 수 있습니다.");
+            if (cmd.getName().equalsIgnoreCase("getbeacon")) {
+                player.getInventory().addItem(new ItemStack(Material.BEACON, 1));
+                return true;
             }
-            return true;
+        }
+        if (!(sender instanceof org.bukkit.entity.Player)) {
+            sender.sendMessage("이 명령어는 플레이어만 사용할 수 있습니다.");
+            return false;
         }
 
+        org.bukkit.entity.Player player = (org.bukkit.entity.Player) sender;
+
+        // OP 권한이 있는지 체크
+        if (!player.isOp()) {
+            player.sendMessage("이 명령어는 OP만 사용할 수 있습니다.");
+            return false;
+        }
+
+        if (cmd.getName().equalsIgnoreCase("EndBlock")) {
+            if (args.length == 1 && (args[0].equalsIgnoreCase("on") || args[0].equalsIgnoreCase("off"))) {
+                FileConfiguration config = getConfig();
+                if (args[0].equalsIgnoreCase("on")) {
+                    preventEnder = true;  // 엔더 월드 차단 활성화
+                    config.set("preventEnder", true);
+                    player.sendMessage("엔더 월드 진입 차단이 활성화되었습니다.");
+                    // End 월드에서 0, 100, 0 좌표 설정
+                    Location location = new Location(Bukkit.getWorld("world_the_end"), 0, 100, 0);
+
+                    // 드래곤 소환
+                    EnderDragon dragon = (EnderDragon) location.getWorld().spawnEntity(location, EntityType.ENDER_DRAGON);
+
+                    // 드래곤의 HP를 1024로 설정
+                    dragon.getAttribute(Attribute.GENERIC_MAX_HEALTH).setBaseValue(1024);
+                    dragon.setHealth(1024);  // HP를 설정
+                } else if (args[0].equalsIgnoreCase("off")) {
+                    preventEnder = false;  // 엔더 월드 차단 비활성화
+                    config.set("preventEnder", false);
+                    player.sendMessage("엔더 월드 진입 차단이 비활성화되었습니다.");
+                }
+                saveConfig();  // 설정 파일에 변경 사항 저장
+                return true;
+            }
+            player.sendMessage("사용법: /EndBlock [on/off]");
+        }
         return false;
     }
 
