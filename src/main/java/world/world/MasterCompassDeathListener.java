@@ -37,7 +37,7 @@ public class MasterCompassDeathListener implements Listener {
                 killer.sendMessage("§6 축하합니다! 엔드 드래곤을 처치하여 마스터 컴퍼스를 획득했습니다!");
 
                 for (Player player : Bukkit.getServer().getOnlinePlayers()) {
-                    player.sendMessage("§41분 뒤에 엔드에서 나가집니다!");
+                    player.sendMessage("§41분 뒤에 엔드에서 나가집니다!!");
                 }
 
                 // 1분 뒤 작업 예약
