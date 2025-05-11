@@ -1,18 +1,19 @@
 package world.world;
 
+import net.dv8tion.jda.api.JDA;
+import net.dv8tion.jda.api.JDABuilder;
+import net.dv8tion.jda.api.entities.channel.concrete.TextChannel;
+import net.dv8tion.jda.api.requests.GatewayIntent;
 import org.bukkit.*;
 import org.bukkit.block.Block;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandSender;
-import org.bukkit.entity.EnderDragon;
-import org.bukkit.entity.EntityType;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.block.BlockBreakEvent;
 import org.bukkit.event.block.BlockPistonExtendEvent;
 import org.bukkit.event.block.BlockPistonRetractEvent;
-import org.bukkit.event.block.BlockPlaceEvent;
 import org.bukkit.event.entity.EntityDeathEvent;
 import org.bukkit.event.entity.EntityExplodeEvent;
 import org.bukkit.event.player.PlayerJoinEvent;
@@ -23,14 +24,15 @@ import org.bukkit.plugin.java.JavaPlugin;
 import org.bukkit.potion.PotionEffect;
 import org.bukkit.potion.PotionEffectType;
 import org.bukkit.scheduler.BukkitRunnable;
-import org.bukkit.scoreboard.*;
+import org.bukkit.scoreboard.Scoreboard;
+import org.bukkit.scoreboard.ScoreboardManager;
+import org.bukkit.scoreboard.Team;
 
 import java.util.*;
 import java.util.logging.Logger;
 
-import world.world.Family;
-
 public class BeaconMain extends JavaPlugin implements Listener {
+    private JDA jda;
     private BanManager banManager;
     private static final int BEACON_EFFECT_RADIUS = 100;
     private static Set<String> allUsers = new HashSet<>();
@@ -46,12 +48,25 @@ public class BeaconMain extends JavaPlugin implements Listener {
     public void onEnable() {
 
         try {
+            // 봇 토큰 가져오기
             String token = getConfig().getString("discord-token");
-            String channelId = getConfig().getString("channel-id");
-            DiscordBotManager.start(token, channelId);
-            getLogger().info("✅ 디스코드 봇 실행됨");
+
+            // JDA 초기화
+            jda = JDABuilder.createDefault(token)
+                    .enableIntents(GatewayIntent.GUILD_MESSAGES, GatewayIntent.DIRECT_MESSAGES) // 필요한 Intent 추가
+                    .build();
+
+            jda.awaitReady(); // JDA가 준비될 때까지 기다림
+            TextChannel channel = jda.getTextChannelById("1370924918656729211");
+            if (channel != null) {
+                channel.sendMessage("서버가 시작되었습니다.").queue();
+            } else {
+                getLogger().warning("디스코드 채널을 찾을 수 없습니다. ID를 확인해주세요.");
+            }
+            getLogger().info("JDA 연결 성공!");
         } catch (Exception e) {
-            getLogger().severe("❌ 디스코드 봇 실행 실패: " + e.getMessage());
+            getLogger().severe("JDA 초기화 실패: " + e.getMessage());
+            e.printStackTrace();
         }
 
         // 필요한 매니저 초기화 (가문 매니저, 부활 매니저 등)
@@ -211,6 +226,25 @@ public class BeaconMain extends JavaPlugin implements Listener {
                                                 // 다른 플레이어도 같은 월드인지 확인
                                                 if (beaconLocation.getWorld().equals(otherPlayerLocation.getWorld())
                                                         && otherPlayerLocation.distance(beaconLocation) <= BEACON_EFFECT_RADIUS) {
+                                                    Set<String> validTeams = Set.of("red", "blue", "green");
+                                                    for (String member : playerFamily.getMembers()) {
+                                                        Player members = Bukkit.getPlayer(member);
+                                                        if (members != null && validTeams.contains(members.getName())) {
+                                                            // config.yml에서 해당 팀의 채널 ID를 가져오기
+                                                            String channelId = getConfig().getString("channels." + members);
+
+                                                            // 해당 채널 ID로 TextChannel 객체를 가져옴
+                                                            TextChannel channel = jda.getTextChannelById(channelId);
+
+                                                            // 채널이 null인 경우, 채널을 찾을 수 없다는 경고를 출력
+                                                            if (channel != null) {
+                                                                // 메시지 전송
+                                                                channel.sendMessage("@everyone 적 플레이어가 당신의 기지에 찾아왔습니다!").queue();
+                                                            } else {
+                                                                getLogger().warning("팀 " + members + "의 채널을 찾을 수 없습니다. 확인해주세요.");
+                                                            }
+                                                        }
+                                                    }
                                                     otherPlayer.addPotionEffect(new PotionEffect(PotionEffectType.GLOWING, 120, 1, true, false));
                                                     otherPlayer.addPotionEffect(new PotionEffect(PotionEffectType.SLOW, 120, 0, true, false));
                                                     otherPlayer.addPotionEffect(new PotionEffect(PotionEffectType.WEAKNESS, 120, 0, true, false));

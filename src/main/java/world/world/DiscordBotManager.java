@@ -17,9 +17,12 @@ public class DiscordBotManager {
         }
     }
 
-    public static void sendMessage(String message) {
+    public void sendMessageToChannel(String message, String channelId) {
+        TextChannel channel = jda.getTextChannelById(channelId);
         if (channel != null) {
-            channel.sendMessage(message).queue();
+            channel.sendMessage(message).queue(); // 메시지 전송
+        } else {
+            System.out.println("채널을 찾을 수 없습니다: " + channelId);
         }
     }
 
