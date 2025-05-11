@@ -1,7 +1,7 @@
 discord:
   enabled: true
-  token: "MTM3MDkxMTM1Njc3NzEzNjE3OA.GKMFG_.xPQmqGJH7bY-mhEIngGlbUVw3RVXNtyTyVTORQ"
-  default-channel-id: "1370924918656729211"
+  token: "봇 토큰"
+  default-channel-id: "채널 ID"
   family-channels:
   # 각 가문별 채널 ID는 이곳에 저장됩니다
   # 예: family_name: "채널ID"
