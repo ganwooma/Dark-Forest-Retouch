@@ -400,11 +400,11 @@ public class FamilyGUIHandler implements GUIHandler, Listener {
             // 팀원 수에 따른 다이아몬드 소모량 하드코딩
             int requiredDiamonds = 0; // 초기값
             if (teamSize == 1) {
-                requiredDiamonds = 8; // 1명일 때 8개
+                requiredDiamonds = 16; // 1명일 때 8개
             } else if (teamSize == 2) {
-                requiredDiamonds = 16; // 2명일 때 16개
+                requiredDiamonds = 32; // 2명일 때 16개
             } else if (teamSize == 3) {
-                requiredDiamonds = 32; // 3명일 때 32개
+                requiredDiamonds = 64; // 3명일 때 32개
             }
 
             lore.add(ChatColor.GREEN + "클릭 시 다이아몬드 " + requiredDiamonds + "개 소모.");
