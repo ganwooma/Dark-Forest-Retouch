@@ -10,25 +10,25 @@ https://www.koreaminecraft.net/plugins/3968610
 src/main/java/resources/config.yml 에
 
 
-discord-token: "디스코드 봇 토큰"
+    discord-token: "디스코드 봇 토큰"
 
 
-channel-ids:
+    channel-ids:
 
 
-    main: "디스코드 채널 ID"
-
-  
-    팀장 플레이어1 의 닉네임: "디스코드 채널 ID"
+        main: "디스코드 채널 ID"
 
   
-    팀장 플레이어2 의 닉네임: "디스코드 채널 ID"
+        팀장 플레이어1 의 닉네임: "디스코드 채널 ID"
 
   
-    팀장 플레이어3 의 닉네임: "디스코드 채널 ID"
+        팀장 플레이어2 의 닉네임: "디스코드 채널 ID"
 
   
-    팀장 플레이어4 의 닉네임: "디스코드 채널 ID"
+        팀장 플레이어3 의 닉네임: "디스코드 채널 ID"
+
+  
+        팀장 플레이어4 의 닉네임: "디스코드 채널 ID"
 
   
 
