@@ -1,3 +1,6 @@
+# HOW TO SERVER SETUP
+
+
 # 버전
 Minecraft 1.20.4
 
