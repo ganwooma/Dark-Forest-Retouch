@@ -44,6 +44,7 @@ public class BeaconMain extends JavaPlugin implements Listener {
     
     @Override
     public void onEnable() {
+
         // 필요한 매니저 초기화 (가문 매니저, 부활 매니저 등)
         familyManager = new FamilyManager(this);
         banManager = new BanManager();
