@@ -45,6 +45,15 @@ public class BeaconMain extends JavaPlugin implements Listener {
     @Override
     public void onEnable() {
 
+        try {
+            String token = getConfig().getString("discord-token");
+            String channelId = getConfig().getString("channel-id");
+            DiscordBotManager.start(token, channelId);
+            getLogger().info("✅ 디스코드 봇 실행됨");
+        } catch (Exception e) {
+            getLogger().severe("❌ 디스코드 봇 실행 실패: " + e.getMessage());
+        }
+
         // 필요한 매니저 초기화 (가문 매니저, 부활 매니저 등)
         familyManager = new FamilyManager(this);
         banManager = new BanManager();
@@ -96,6 +105,7 @@ public class BeaconMain extends JavaPlugin implements Listener {
 
     @Override
     public void onDisable() {
+        DiscordBotManager.shutdown();
         if (familyManager != null) {
             familyManager.saveFamilies(); // 가문 데이터 저장
             getLogger().info("Families saved!");

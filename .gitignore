@@ -8,3 +8,4 @@ out
 gen
 .gradle
 build
+config.yml
