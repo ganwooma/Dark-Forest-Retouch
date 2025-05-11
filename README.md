@@ -88,4 +88,6 @@ Bot 탭에서 봇 추가 및 토큰 확인
     ./gradlew shadowJar
 로 빌드하십시오
 
+Simple Voice Chat Mod와 함께 플레이 권장
+
 <h1>Made By didi78579 and ChatGPT and Claude</h1> and me
