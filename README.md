@@ -1,7 +1,15 @@
 # 버전
 Minecraft 1.20.4
+
 Spigot Plugin
+
 (Paper도 사용 가능합니다.)
+
+SDK 21
+
+JDK 21
+
+사용
 
 
 # 원본 프로젝트
