@@ -1,5 +1,5 @@
 # HOW TO SERVER SETUP
-
+ganwooma.github.io/build
 
 # 버전
 Minecraft 1.20.4
