@@ -34,12 +34,14 @@ https://www.koreaminecraft.net/plugins/3968610
 ### 설정 방법
 src/main/resource/config.yml 설정
 
-    yamldiscord:
-      enabled: true
-      token: "여기에_디스코드_봇_토큰_입력"
-      default-channel-id: "기본_디스코드_채널_ID"
-      family-channels:
+```yml
+yamldiscord:
+    enabled: true
+    token: "여기에_디스코드_봇_토큰_입력"
+    default-channel-id: "기본_디스코드_채널_ID"
+    family-channels:
         # 가문별 채널 ID는 자동으로 저장됩니다
+```
 
 
 ### 디스코드 봇 생성 및 토큰 획득
