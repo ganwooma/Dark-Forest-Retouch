@@ -97,9 +97,7 @@ Simple Voice Chat Mod와 Simple Voice Chat Plugin 사용 권장
 
 CurseForge(mod) URL: https://www.curseforge.com/minecraft/mc-mods/simple-voice-chat
 
-Modrinth(mod) URL: https://modrinth.com/plugin/simple-voice-chat
-
-SpigotMC(plugin) URL: https://www.spigotmc.org/resources/simple-voice-chat.93738/
+Modrinth(mod and plugin) URL: https://modrinth.com/plugin/simple-voice-chat
 
 <h1>Made By didi78579 and ChatGPT and Claude</h1>
 and me
