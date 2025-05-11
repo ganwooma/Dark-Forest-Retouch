@@ -62,7 +62,7 @@ public class BeaconMain extends JavaPlugin implements Listener {
                 event.setQuitMessage(null); // 퇴장 메시지 숨기기
             }
         }, this);
-        
+
         familyManager = new FamilyManager(this);
         banManager = new BanManager();
         reviveManager = new PlayerReviveManager(this);
