@@ -228,20 +228,11 @@ public class BeaconMain extends JavaPlugin implements Listener {
         }
     }
 
-    // 엔더 크리스탈 죽음 방지
-    @EventHandler
-    public void onEnderCrystalDeath(EntityDamageByEntityEvent event) {
-        Entity entity = event.getEntity();
-        if (entity instanceof EnderCrystal) {
-            event.setCancelled(true); // 엔더 크리스탈이 공격을 받아도 죽지 않음
-        }
-    }
-
     // 엔더 크리스탈 소환 시 방지 (이벤트에서 소환된 크리스탈이 즉시 죽지 않도록 처리)
     @EventHandler
     public void onEnderCrystalSpawn(EntitySpawnEvent event) {
         if (event.getEntity() instanceof EnderCrystal) {
-            // 엔더 크리스탈 소환 시 추가적인 처리가 필요하면 여기서 다룰 수 있음
+            event.setCancelled(true);
         }
     }
 
