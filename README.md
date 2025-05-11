@@ -87,7 +87,9 @@ Bot 탭에서 봇 추가 및 토큰 확인
 
 
 # 빌드
-    ./gradlew shadowJar
+```bash
+./gradlew shadowJar
+```
 로 빌드하십시오
 
 # 플레이
