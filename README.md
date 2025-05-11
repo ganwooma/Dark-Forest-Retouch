@@ -1,3 +1,9 @@
+# 버전
+Minecraft 1.20.4
+Spigot Plugin
+(Paper도 사용 가능합니다.)
+
+
 # 원본 프로젝트
 https://github.com/didi78579/-
 
@@ -74,3 +80,9 @@ Bot 탭에서 봇 추가 및 토큰 확인
 플레이 가능한 인원은 4x4 16명입니다.
 
 2팀, 3팀으로도 플레이 가능합니다.
+
+
+# 빌드
+    ./gradlew shadowJar
+로 빌드하십시오
+
