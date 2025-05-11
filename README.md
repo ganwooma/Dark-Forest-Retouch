@@ -102,4 +102,4 @@ Modrinth(mod) URL: https://modrinth.com/plugin/simple-voice-chat
 SpigotMC(plugin) URL: https://www.spigotmc.org/resources/simple-voice-chat.93738/
 
 <h1>Made By didi78579 and ChatGPT and Claude</h1>
--# and me
+and me
