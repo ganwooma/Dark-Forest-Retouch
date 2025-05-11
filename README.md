@@ -33,10 +33,14 @@ https://www.koreaminecraft.net/plugins/3968610
 
 ### 엔드 탐험 금지
 플레이어가 드래곤을 잡으면 1분 후에 엔드에 있던 모든 플레이어가 밖으로 쫒겨납니다.
+그리고 나서 엔드가 잠깁니다.
 
 
-### getbeacon 또는 getb 명령어
-getbeacon, getb 명령어가 모두에게 적용됩니다.
+### 엔드 잠금
+/EndBlock on|off로 엔드 잠금
+off시 엔더드래곤이 스폰합니다.
+기본적으로 off이므로 엔더드래곤이 잡힌 후에
+알아서 off하십시오
 
 
 ### 명령어 피드백
@@ -61,16 +65,21 @@ F3을 눌렀을 때 Debug Info가 나옵니다.
 오버월드 / 지옥 / 엔드에서 엔드 크리스탈이 설최되지 않습니다.
 
 
+### 겉날개 획득
+겉날개를 획득하지 못합니다.
+
 # 설정 방법
 src/main/resource/config.yml 설정
 
 ```yml
-yamldiscord:
-    enabled: true
-    token: "여기에_디스코드_봇_토큰_입력"
-    default-channel-id: "기본_디스코드_채널_ID"
-    family-channels:
-        # 가문별 채널 ID는 자동으로 저장됩니다
+discord:
+  enabled: true
+  token: "디스코드 토큰"
+  default-channel-id: "서버 상태를 알려줄 디스코드 채널"
+  family-channels:
+  # 각 가문별 채널 ID는 이곳에 저장됩니다
+  # 예: family_name: "채널ID"
+preventEnder: false  # 엔더 월드 진입 차단 여부 (true: 차단, false: 차단 안 함) false로 해놓으십시오
 ```
 
 
