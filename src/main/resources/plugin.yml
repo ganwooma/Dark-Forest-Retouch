@@ -2,6 +2,7 @@ name: Beacon_Plugin
 main: world.world.BeaconMain
 version: "1.21"
 api-version: 1.20
+author: Ganwooma
 commands:
   getbeacon:
     description: Gives a beacon to the player.
@@ -17,3 +18,6 @@ commands:
   family:
     description: 가문 관련 명령어
     usage: /family <create|join|leave|info|color>
+  discord:
+    description: 디스코드 설정 명령어
+    usage: /<command> <set|reload> [가문이름] [채널ID]

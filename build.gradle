@@ -1,5 +1,7 @@
+// build.gradle 파일
 plugins {
     id 'java'
+    id 'com.github.johnrengelman.shadow' version '7.1.2'
 }
 
 group = 'upgrade_final2'
@@ -10,19 +12,22 @@ repositories {
     maven {
         name = "papermc-repo"
         url = "https://repo.papermc.io/repository/maven-public/"
-    }
-    maven {
-        name = "sonatype"
-        url = "https://oss.sonatype.org/content/groups/public/"
-    }
+}
+maven {
+    name = "sonatype"
+    url = "https://oss.sonatype.org/content/groups/public/"
+}
+maven {
+    name = "dv8tion"
+    url = "https://m2.dv8tion.net/releases"
+}
 }
 
 dependencies {
     compileOnly("io.papermc.paper:paper-api:1.20.4-R0.1-SNAPSHOT")
-
     implementation 'com.google.code.gson:gson:2.10.1'
-
-    implementation 'net.dv8tion:JDA:5.0.0-beta.13' // 최신 버전 확인
+    implementation 'net.dv8tion:JDA:5.0.0-beta.13' // 또는 사용 중인 버전
+    implementation 'org.slf4j:slf4j-api:1.7.36'    // SLF4J 추가
 }
 
 def targetJavaVersion = 17
@@ -52,10 +57,24 @@ processResources {
     }
 }
 
-
 tasks.jar {
     archiveFileName = 'Beacon_Plugin.jar'
     destinationDirectory = file('C:\\Users\\PC\\OneDrive\\바탕 화면\\')
+}
+
+shadowJar {
+    archiveFileName = 'Beacon_Plugin-Full.jar'
+    destinationDirectory = file('C:\\Users\\PC\\OneDrive\\바탕 화면\\')
+
+    // JDA와 관련 종속성 재배치
+    relocate 'net.dv8tion.jda', 'world.world.shaded.jda'
+    relocate 'com.neovisionaries', 'world.world.shaded.neovisionaries'
+    relocate 'org.slf4j', 'world.world.shaded.slf4j'
+    relocate 'gnu.trove', 'world.world.shaded.trove'
+}
+
+build {
+    dependsOn shadowJar
 }
 
 tasks.withType(JavaCompile) {
