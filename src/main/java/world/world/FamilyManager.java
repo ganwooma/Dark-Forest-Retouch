@@ -147,7 +147,7 @@ public class FamilyManager implements Listener {
     public static Location getBeaconLocation(String playerName) {
         Family family = getFamily(playerName);
         if (family == null) {
-            System.err.println("가족 정보가 없습니다: " + playerName);
+            //System.err.println("가족 정보가 없습니다: " + playerName);
             return null;
         }
         return family.getBeaconLocation();
@@ -156,11 +156,11 @@ public class FamilyManager implements Listener {
     public static void setBeaconLocation(String playerName, Location location) {
         Family family = getFamily(playerName);
         if (family != null) {
-            System.out.println("Setting beacon location for player: " + playerName + " at " + location);
+            //System.out.println("Setting beacon location for player: " + playerName + " at " + location);
             family.setBeaconLocation(location);
             saveFamilies();
         } else {
-            System.err.println("Error: Family not found for player: " + playerName);
+            //System.err.println("Error: Family not found for player: " + playerName);
         }
     }
 

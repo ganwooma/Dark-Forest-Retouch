@@ -27,7 +27,8 @@ dependencies {
     compileOnly("io.papermc.paper:paper-api:1.20.4-R0.1-SNAPSHOT")
     implementation 'com.google.code.gson:gson:2.10.1'
     implementation 'net.dv8tion:JDA:5.0.0-beta.13' // 또는 사용 중인 버전
-    implementation 'org.slf4j:slf4j-api:1.7.36'    // SLF4J 추가
+    implementation 'org.slf4j:slf4j-api:1.7.36'
+    implementation 'org.slf4j:slf4j-simple:1.7.36' // 또는 logback-classic
 }
 
 def targetJavaVersion = 17

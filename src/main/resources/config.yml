@@ -1,7 +1,7 @@
 discord:
   enabled: true
-  token: "디스코드 토큰"
-  default-channel-id: "서버 상태를 알려줄 디스코드 채널"
+  token: "MTM3MDkxMTM1Njc3NzEzNjE3OA.GKMFG_.xPQmqGJH7bY-mhEIngGlbUVw3RVXNtyTyVTORQ"
+  default-channel-id: "1370924918656729211"
   family-channels:
   # 각 가문별 채널 ID는 이곳에 저장됩니다
   # 예: family_name: "채널ID"

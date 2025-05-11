@@ -78,7 +78,7 @@ public class BeaconMain extends JavaPlugin implements Listener {
         // 기존 코드 유지
         MasterCompassManager masterCompassManager = new MasterCompassManager(this, familyManager);
         pm.registerEvents(new MasterCompassListener(masterCompassManager), this);
-        pm.registerEvents(new MasterCompassDeathListener(masterCompassManager), this);
+        getServer().getPluginManager().registerEvents(new MasterCompassDeathListener(masterCompassManager, this), this);
 
         Logger logger = this.getLogger();
         familyGuiHandler = new FamilyGUIHandler(this, reviveManager, familyManager, logger);
