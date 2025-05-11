@@ -35,10 +35,6 @@ https://www.koreaminecraft.net/plugins/3968610
 플레이어가 드래곤을 잡으면 1분 후에 엔드에 있던 모든 플레이어가 밖으로 쫒겨납니다.
 
 
-### getbeacon 또는 getb 명령어
-getbeacon, getb 명령어가 모두에게 적용됩니다.
-
-
 ### 명령어 피드백
 명령어 피드백을 비활성시킵니다.
 
