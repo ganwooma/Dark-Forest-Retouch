@@ -93,7 +93,7 @@ Bot 탭에서 봇 추가 및 토큰 확인
 로 빌드하십시오
 
 # 플레이
-Simple Voice Chat Mod 확은 Simple Voice Chat Plugin 사용 권장
+Simple Voice Chat Mod와 Simple Voice Chat Plugin 사용 권장
 
 CurseForge(mod) URL: https://www.curseforge.com/minecraft/mc-mods/simple-voice-chat
 
