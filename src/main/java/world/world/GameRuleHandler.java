@@ -39,11 +39,14 @@ public class GameRuleHandler implements Listener {
         // 플레이어 아이템 소지 유지
         world.setGameRule(GameRule.KEEP_INVENTORY, true);
 
-        // 좌표 숨김 설정
-        world.setGameRule(GameRule.REDUCED_DEBUG_INFO, true);
-
         // 팬텀 스폰을 막기 위해 doInsomnia 게임룰 설정
         world.setGameRule(GameRule.DO_INSOMNIA, false);
+
+        // 도전과제 안뜨게
+        world.setGameRule(GameRule.ANNOUNCE_ADVANCEMENTS, false);
+
+        // 채팅에 명령어 피드백 안뜨게
+        world.setGameRule(GameRule.SEND_COMMAND_FEEDBACK, false);
     }
 
     /**

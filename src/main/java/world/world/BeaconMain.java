@@ -4,15 +4,21 @@ import org.bukkit.*;
 import org.bukkit.block.Block;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandSender;
+import org.bukkit.entity.EnderCrystal;
+import org.bukkit.entity.Entity;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.block.BlockBreakEvent;
 import org.bukkit.event.block.BlockPistonExtendEvent;
 import org.bukkit.event.block.BlockPistonRetractEvent;
+import org.bukkit.event.block.BlockPlaceEvent;
+import org.bukkit.event.entity.EntityDamageByEntityEvent;
 import org.bukkit.event.entity.EntityDeathEvent;
 import org.bukkit.event.entity.EntityExplodeEvent;
+import org.bukkit.event.entity.EntitySpawnEvent;
 import org.bukkit.event.player.PlayerJoinEvent;
+import org.bukkit.event.player.PlayerQuitEvent;
 import org.bukkit.event.player.PlayerRespawnEvent;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.plugin.PluginManager;
@@ -40,6 +46,18 @@ public class BeaconMain extends JavaPlugin implements Listener {
 
     @Override
     public void onEnable() {
+        getServer().getPluginManager().registerEvents(new Listener() {
+            @EventHandler
+            public void onJoin(PlayerJoinEvent event) {
+                event.setJoinMessage(null); // 접속 메시지 숨기기
+            }
+
+            @EventHandler
+            public void onQuit(PlayerQuitEvent event) {
+                event.setQuitMessage(null); // 퇴장 메시지 숨기기
+            }
+        }, this);
+
         // 기존 코드 유지
         familyManager = new FamilyManager(this);
         banManager = new BanManager();
@@ -111,14 +129,27 @@ public class BeaconMain extends JavaPlugin implements Listener {
 
     @Override
     public boolean onCommand(CommandSender sender, Command cmd, String label, String[] args) {
-        if (sender instanceof Player) {
-            Player player = (Player) sender;
+        if (cmd.getName().equalsIgnoreCase("getbeacon")) {
+            if (sender instanceof Player) {
+                Player senderPlayer = (Player) sender;
 
-            if (cmd.getName().equalsIgnoreCase("getbeacon")) {
-                player.getInventory().addItem(new ItemStack(Material.BEACON, 1));
-                return true;
+                // 모든 가문을 순회
+                for (FamilyManager.Family family : FamilyManager.getAllFamilies()) {
+                    String leaderName = family.getLeader(); // 리더의 이름
+                    Player leader = Bukkit.getPlayer(leaderName);
+
+                    if (leader != null && leader.isOnline()) {
+                        leader.getInventory().addItem(new ItemStack(Material.BEACON, 1));
+                        leader.sendMessage(ChatColor.GREEN + "[알림] 당신의 가문을 위한 신호기가 지급되었습니다.");
+                    }
+                }
+                senderPlayer.sendMessage(ChatColor.YELLOW + "[관리자] 모든 가문의 대장에게 신호기를 지급했습니다.");
+            } else {
+                sender.sendMessage("이 명령어는 플레이어만 사용할 수 있습니다.");
             }
+            return true;
         }
+
         return false;
     }
 
@@ -167,7 +198,52 @@ public class BeaconMain extends JavaPlugin implements Listener {
         }
     }
 
+    @EventHandler
+    public void onBedPlace(BlockPlaceEvent event) {
+        Material[] bedColors = {
+                Material.RED_BED, Material.ORANGE_BED, Material.YELLOW_BED,
+                Material.LIME_BED, Material.GREEN_BED, Material.CYAN_BED,
+                Material.BLUE_BED, Material.PURPLE_BED, Material.MAGENTA_BED,
+                Material.PINK_BED, Material.BROWN_BED, Material.GRAY_BED,
+                Material.LIGHT_GRAY_BED, Material.BLACK_BED, Material.WHITE_BED
+        };
+        for (Material colorBed : bedColors) {
+            if (event.getBlock().getType() == colorBed) {
+                World world = event.getBlock().getWorld();
+                if (world.getEnvironment() == World.Environment.NETHER || world.getEnvironment() == World.Environment.THE_END) {
+                    event.setCancelled(true); // 네더, 엔드에서는 침대 설치를 막음
+                }
+            }
+        }
+    }
 
+    // 리스폰 정박기 설치 제한: 오버월드, 엔드에서도 설치 가능하도록 설정
+    @EventHandler
+    public void onRespawnAnchorPlace(BlockPlaceEvent event) {
+        if (event.getBlock().getType() == Material.RESPAWN_ANCHOR) {
+            World world = event.getBlock().getWorld();
+            if (world.getEnvironment() == World.Environment.NETHER || world.getEnvironment() == World.Environment.NORMAL || world.getEnvironment() == World.Environment.THE_END) {
+                // 오버월드, 엔드에서 리스폰 정박기 설치 가능
+            }
+        }
+    }
+
+    // 엔더 크리스탈 죽음 방지
+    @EventHandler
+    public void onEnderCrystalDeath(EntityDamageByEntityEvent event) {
+        Entity entity = event.getEntity();
+        if (entity instanceof EnderCrystal) {
+            event.setCancelled(true); // 엔더 크리스탈이 공격을 받아도 죽지 않음
+        }
+    }
+
+    // 엔더 크리스탈 소환 시 방지 (이벤트에서 소환된 크리스탈이 즉시 죽지 않도록 처리)
+    @EventHandler
+    public void onEnderCrystalSpawn(EntitySpawnEvent event) {
+        if (event.getEntity() instanceof EnderCrystal) {
+            // 엔더 크리스탈 소환 시 추가적인 처리가 필요하면 여기서 다룰 수 있음
+        }
+    }
 
     private void applyBeaconEffects() {
         getServer().getWorlds().forEach(world -> {

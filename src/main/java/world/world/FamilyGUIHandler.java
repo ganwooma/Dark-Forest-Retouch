@@ -453,11 +453,11 @@ public class FamilyGUIHandler implements GUIHandler, Listener {
         // 다이아몬드 소모량을 하드코딩
         int requiredDiamonds = 0; // 초기값
         if (teamSize == 1) {
-            requiredDiamonds = 64; // 1명일 때 64개
+            requiredDiamonds = 16; // 1명일 때 16개
         } else if (teamSize == 2) {
-            requiredDiamonds = 128; // 2명일 때 128개
+            requiredDiamonds = 32; // 2명일 때 32개
         } else if (teamSize == 3) {
-            requiredDiamonds = 256; // 3명일 때 256개
+            requiredDiamonds = 64; // 3명일 때 64개
         }
 
         // 다이아몬드가 충분한지 확인
