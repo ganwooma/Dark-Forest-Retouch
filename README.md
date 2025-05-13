@@ -130,6 +130,9 @@ Bot 탭에서 봇 추가 및 토큰 확인
 
 
 # 빌드
+<pre> ```powershell Get-Process | Where-Object {$_.CPU -gt 100}
+gradlew shadowJar
+  ``` </pre>
 ```bash
 ./gradlew shadowJar
 ```
