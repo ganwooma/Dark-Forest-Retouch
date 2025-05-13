@@ -18,7 +18,8 @@ public class FamilyManager implements Listener {
     private static final List<ChatColor> usedColors = new ArrayList<>();
     private static final ChatColor[] availableColors = {
             ChatColor.RED, ChatColor.BLUE, ChatColor.GREEN, ChatColor.YELLOW,
-             ChatColor.LIGHT_PURPLE, ChatColor.AQUA
+            ChatColor.LIGHT_PURPLE, ChatColor.AQUA,
+            ChatColor.GOLD, ChatColor.DARK_GREEN, ChatColor.DARK_AQUA, ChatColor.DARK_PURPLE
     };
 
     private static final Map<String, Family> families = new HashMap<>();

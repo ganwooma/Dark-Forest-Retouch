@@ -152,25 +152,26 @@ public class BeaconMain extends JavaPlugin implements Listener {
 
     @Override
     public boolean onCommand(CommandSender sender, Command cmd, String label, String[] args) {
-        if (sender instanceof Player) {
-            Player player = (Player) sender;
-
-            if (cmd.getName().equalsIgnoreCase("getbeacon")) {
-                player.getInventory().addItem(new ItemStack(Material.BEACON, 1));
-                return true;
-            }
-        }
-        if (!(sender instanceof org.bukkit.entity.Player)) {
+        if (!(sender instanceof Player)) {
             sender.sendMessage("이 명령어는 플레이어만 사용할 수 있습니다.");
             return false;
         }
 
-        org.bukkit.entity.Player player = (org.bukkit.entity.Player) sender;
+        Player player = (Player) sender;
 
         // OP 권한이 있는지 체크
         if (!player.isOp()) {
             player.sendMessage("이 명령어는 OP만 사용할 수 있습니다.");
             return false;
+        }
+
+        if (cmd.getName().equalsIgnoreCase("getbeacon")) {
+            for (Player onlinePlayer : Bukkit.getOnlinePlayers()) {
+                onlinePlayer.getInventory().addItem(new ItemStack(Material.BEACON, 1));
+                onlinePlayer.sendMessage("비콘 1개가 지급되었습니다.");
+            }
+            player.sendMessage("모든 온라인 플레이어에게 비콘을 지급했습니다.");
+            return true;
         }
 
         if (cmd.getName().equalsIgnoreCase("EndBlock")) {
@@ -180,16 +181,21 @@ public class BeaconMain extends JavaPlugin implements Listener {
                     preventEnder = true;  // 엔더 월드 차단 활성화
                     config.set("preventEnder", true);
                     player.sendMessage("엔더 월드 진입 차단이 활성화되었습니다.");
+                    for (World world : Bukkit.getWorlds()) {
+                        for (Entity entity : world.getEntities()) {
+                            if (entity instanceof EnderDragon) {
+                                entity.remove(); // 드래곤 제거
+                            }
+                        }
+                    }
                     // End 월드에서 0, 100, 0 좌표 설정
                     Location location = new Location(Bukkit.getWorld("world_the_end"), 0, 100, 0);
-
                     // 드래곤 소환
                     EnderDragon dragon = (EnderDragon) location.getWorld().spawnEntity(location, EntityType.ENDER_DRAGON);
-
                     // 드래곤의 HP를 1024로 설정
                     dragon.getAttribute(Attribute.GENERIC_MAX_HEALTH).setBaseValue(1024);
                     dragon.setHealth(1024);  // HP를 설정
-                } else if (args[0].equalsIgnoreCase("off")) {
+                } else {
                     preventEnder = false;  // 엔더 월드 차단 비활성화
                     config.set("preventEnder", false);
                     player.sendMessage("엔더 월드 진입 차단이 비활성화되었습니다.");
@@ -198,9 +204,12 @@ public class BeaconMain extends JavaPlugin implements Listener {
                 return true;
             }
             player.sendMessage("사용법: /EndBlock [on/off]");
+            return false;
         }
+
         return false;
     }
+
 
     @EventHandler
     public void onEntityExplode(EntityExplodeEvent event) {
@@ -217,9 +226,8 @@ public class BeaconMain extends JavaPlugin implements Listener {
     public void onEntityDeath(EntityDeathEvent event) {
         if (event.getEntity() instanceof Player) {
             Player player = (Player) event.getEntity();
-            Player killer = player.getKiller();
 
-            banManager.banPlayer(player.getUniqueId(), 60000L);
+            banManager.banPlayer(player.getUniqueId(), 180000L);
         }
     }
 

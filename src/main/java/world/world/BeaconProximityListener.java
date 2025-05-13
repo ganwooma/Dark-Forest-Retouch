@@ -75,9 +75,7 @@ public class BeaconProximityListener implements Listener {
                 setCooldown(player.getUniqueId(), family.getLeader());
 
                 // 디스코드로 알림 전송
-                String alertMessage = ":warning: **경고!** " + playerFamily.getLeader() + " 가문의 " + playerName +
-                        "님이 " + family.getLeader() + " 가문의 비콘 근처(" +
-                        Math.round(distance) + "m)에 접근했습니다!";
+                String alertMessage = ":warning: **경고!** 누군가가 기지 근처에 접근했습니다!";
 
                 discordManager.sendFamilyAlert(family.getLeader(), alertMessage);
 
@@ -85,9 +83,7 @@ public class BeaconProximityListener implements Listener {
                 for (String memberName : family.getMembers()) {
                     Player member = Bukkit.getPlayer(memberName);
                     if (member != null && member.isOnline()) {
-                        member.sendMessage(ChatColor.RED + "경고! " + playerFamily.getLeader() +
-                                " 가문의 " + playerName + "님이 비콘 근처에 접근했습니다! (" +
-                                Math.round(distance) + "m)");
+                        member.sendMessage(ChatColor.RED + "경고! 누군가가 기지 근처에 접근했습니다!");
                     }
                 }
             }

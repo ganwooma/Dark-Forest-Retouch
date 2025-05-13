@@ -29,7 +29,6 @@ public class PlayerReviveManager {
             long remainingMillis = banEndTime - System.currentTimeMillis();
             long seconds = (remainingMillis / 1000) % 60;
             long minutes = (remainingMillis / (1000 * 60)) % 60;
-            long hours = (remainingMillis / (1000 * 60 * 60)) % 24;
 
             player.kickPlayer(String.format("밴된 상태입니다. 남은 시간: %02d분 %02d초", minutes, seconds));
         } else {

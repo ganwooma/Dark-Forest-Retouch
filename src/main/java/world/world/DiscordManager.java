@@ -37,14 +37,14 @@ public class DiscordManager {
         }
 
         String token = config.getString("discord.token");
-        if (token == null || token.equals("여기에_디스코드_봇_토큰_입력")) {
+        if (token == null) {
             logger.warning("디스코드 봇 토큰이 설정되지 않았습니다!");
             enabled = false;
             return;
         }
 
         defaultChannelId = config.getString("discord.default-channel-id");
-        if (defaultChannelId == null || defaultChannelId.equals("기본_디스코드_채널_ID")) {
+        if (defaultChannelId == null ) {
             logger.warning("기본 디스코드 채널 ID가 설정되지 않았습니다!");
         }
 
@@ -72,10 +72,10 @@ public class DiscordManager {
                     .build();
 
             jda.awaitReady();
-            logger.info("디스코드 봇이 성공적으로 연결되었습니다!");
+            logger.info("✅ 디스코드 봇이 성공적으로 연결되었습니다!");
 
             // 테스트 메시지 전송
-            sendMessageToDefaultChannel("마인크래프트 서버가 시작되었습니다.");
+            sendMessageToDefaultChannel("✅ 마인크래프트 서버가 시작되었습니다.");
         } catch (Exception e) {
             logger.severe("디스코드 봇 연결 중 오류 발생: " + e.getMessage());
             e.printStackTrace();
@@ -138,7 +138,7 @@ public class DiscordManager {
 
     public void shutdown() {
         if (jda != null) {
-            sendMessageToDefaultChannel("마인크래프트 서버가 종료되었습니다.");
+            sendMessageToDefaultChannel("❎ 마인크래프트 서버가 종료되었습니다.");
             jda.shutdown();
         }
     }

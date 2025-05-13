@@ -382,13 +382,13 @@ public class BeaconBlockEventHandler implements Listener {
         Player player = event.getEntity();
         String playerName = player.getName();
 
-        long banDuration = 60000L; // 1시간 밴(밀리초)
+        long banDuration = 180000L; // 3분 밴(밀리초)
         playerReviveManager.banPlayer(player.getUniqueId(), banDuration);
 
         new BukkitRunnable() {
             @Override
             public void run() {
-                player.kickPlayer(ChatColor.RED + "사망하여 1분 동안 밴되었습니다.");
+                player.kickPlayer(ChatColor.RED + "사망하여 3분 동안 밴되었습니다.");
             }
         }.runTaskLater(plugin, 20L); // 1초 후 실행
     }
