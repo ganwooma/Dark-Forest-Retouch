@@ -1,0 +1,8 @@
+discord:
+  enabled: true
+  token: "봇 토큰"
+  default-channel-id: "채널 ID"
+  family-channels:
+  # 각 가문별 채널 ID는 이곳에 저장됩니다
+  # 예: family_name: "채널ID"
+preventEnder: false  # 엔더 월드 진입 차단 여부 (true: 차단, false: 차단 안 함)

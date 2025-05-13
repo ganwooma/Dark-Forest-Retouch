@@ -1,4 +1,6 @@
 # HOW TO SERVER SETUP
+README 파일을 먼저 모두 읽고 보시길 바랍니다.
+
 https://ganwooma.github.io/build
 
 # 버전
@@ -71,6 +73,10 @@ F3을 눌렀을 때 Debug Info가 나옵니다.
 ### 겉날개 획득
 겉날개를 획득하지 못합니다.
 
+
+### 가문 최대 수
+가문 최대 수를 6가문에서 10가문으로 늘렸습니다.
+
 # 설정 방법
 src/main/resource/config.yml 설정
 
@@ -82,6 +88,7 @@ discord:
   family-channels:
   # 각 가문별 채널 ID는 이곳에 저장됩니다
   # 예: family_name: "채널ID"
+  # 직접 저장하셔도 됩니다.
 preventEnder: false  # 엔더 월드 진입 차단 여부 (true: 차단, false: 차단 안 함) false로 해놓으십시오
 ```
 
@@ -112,7 +119,7 @@ Bot 탭에서 봇 추가 및 토큰 확인
 
 
 # 플레이어 밴 시간 조정
-1시간 → 1분
+1시간 → 3분
 
 # 플레이어 뽑기 가격
 1회 → 16 다이아
@@ -129,6 +136,11 @@ Bot 탭에서 봇 추가 및 토큰 확인
 
 
 # 빌드
+윈도우에 경우
+```powershell Get-Process | Where-Object {$_.CPU -gt 100}
+gradlew shadowJar
+```
+리눅스에 경우 (bash)
 ```bash
 ./gradlew shadowJar
 ```
