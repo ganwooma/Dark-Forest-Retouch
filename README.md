@@ -14,6 +14,11 @@ SDK 21 / JDK 21 사용
 # 원본 프로젝트
 https://github.com/didi78579/-
 
+
+# 러스트 시스템 플러그인 (함께 사용하세요)
+https://github.com/ganwooma/Rust-System-Plugin/tree/JAR
+
+
 # 기본적인 사용법
 https://www.koreaminecraft.net/plugins/3968610
 
