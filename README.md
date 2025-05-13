@@ -82,6 +82,7 @@ discord:
   family-channels:
   # 각 가문별 채널 ID는 이곳에 저장됩니다
   # 예: family_name: "채널ID"
+  # 직접 저장하셔도 됩니다.
 preventEnder: false  # 엔더 월드 진입 차단 여부 (true: 차단, false: 차단 안 함) false로 해놓으십시오
 ```
 
