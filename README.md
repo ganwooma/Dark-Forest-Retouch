@@ -83,8 +83,9 @@ F3을 눌렀을 때 Debug Info가 나옵니다.
 가문 최대 수를 6가문에서 10가문으로 늘렸습니다.
 
 # 설정 방법
-plugins/Beacon_Plugin/config.yml
-혹은 빌드 시 src/main/resource/config.yml 설정
+plugins/Beacon_Plugin/config.yml 설정 방법
+
+혹은 빌드 시 src/main/resource/config.yml 설정 방법
 
 ```yml
 discord:
