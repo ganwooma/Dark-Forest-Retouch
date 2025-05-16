@@ -156,9 +156,9 @@ gradlew shadowJar
 # 플레이
 Simple Voice Chat Mod와 Simple Voice Chat Plugin 사용 권장
 
-CurseForge(mod) URL: https://www.curseforge.com/minecraft/mc-mods/simple-voice-chat
-
 Modrinth(mod and plugin) URL: https://modrinth.com/plugin/simple-voice-chat
+
+CurseForge(mod) URL: https://www.curseforge.com/minecraft/mc-mods/simple-voice-chat
 
 <h1>Made By didi78579 and ChatGPT and Claude</h1>
 and me
