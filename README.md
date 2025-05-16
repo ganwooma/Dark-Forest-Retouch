@@ -19,7 +19,7 @@ https://github.com/didi78579/-
 https://github.com/ganwooma/Rust-System-Plugin/tree/JAR
 
 
-# 기본적인 사용법
+# 기본적인 사용법 & 업그레이드 플러그인
 https://www.koreaminecraft.net/plugins/3968610
 
 
