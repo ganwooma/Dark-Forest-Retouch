@@ -10,6 +10,8 @@ import java.util.Random;
 
 public class StartGameCommand implements CommandExecutor {
 
+    private FamilyManager familyManager;
+
     @Override
     public boolean onCommand(CommandSender sender, Command command, String label, String[] args) {
         if (sender instanceof Player) {
@@ -62,6 +64,11 @@ public class StartGameCommand implements CommandExecutor {
 
                 // 해당 위치를 플레이어의 스폰포인트로 설정
                 p.setBedSpawnLocation(randomLocation, true);
+
+                ChatColor familyColor = FamilyManager.getRandomTeamColor();
+                if (familyColor != null) {
+                    familyManager.createFamily(player.getName(), randomLocation, familyColor);
+                }
             }
         }
 
