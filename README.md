@@ -12,15 +12,15 @@ SDK 21 / JDK 21 사용
 
 
 # 원본 프로젝트
-https://github.com/didi78579/-
+[원본 프로젝트(Github)](https://github.com/didi78579/-)
 
 
-# 러스트 시스템 플러그인 (함께 사용하세요)
-https://github.com/ganwooma/Avatar/tree/main
+# 아바타 시스템 플러그인 (함께 사용하세요)
+[아바타 시스템 플러그인(Github)](https://github.com/ganwooma/Avatar/tree/main)
 
 
 # 기본적인 사용법 & 업그레이드 플러그인
-https://www.koreaminecraft.net/plugins/3968610
+[기본적인 사용법 & 업그레이드 플러그인(한마포)](https://www.koreaminecraft.net/plugins/3968610)
 
 
 # 추가된 기능
