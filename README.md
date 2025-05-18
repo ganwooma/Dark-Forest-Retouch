@@ -16,7 +16,7 @@ https://github.com/didi78579/-
 
 
 # 러스트 시스템 플러그인 (함께 사용하세요)
-[https://github.com/ganwooma/Rust-System-Plugin/tree/JAR](https://github.com/ganwooma/Avatar/tree/main)
+https://github.com/ganwooma/Avatar/tree/main
 
 
 # 기본적인 사용법 & 업그레이드 플러그인
