@@ -1,7 +1,7 @@
-# HOW TO SERVER SETUP
+# How To Plugin Build & Server Setup
 README 파일을 먼저 모두 읽고 보시길 바랍니다.
 
-[How To Server Setup](https://ganwooma.github.io/build)
+[How To Pluing Build & Server Setup](https://ganwooma.github.io/build)
 
 # 버전
 Minecraft 1.20.4
