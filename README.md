@@ -1,39 +1,42 @@
-# HOW TO SERVER SETUP
+# How To Plugin Build & Server Setup
 README 파일을 먼저 모두 읽고 보시길 바랍니다.
 
-https://ganwooma.github.io/build
+[How To Pluing Build & Server Setup](https://ganwooma.github.io/build)
 
 # 버전
 Minecraft 1.20.4
 
-Spigot Plugin (Paper도 사용 가능합니다.)
+Spigot Plugin (Paper도 사용 가능합니다)
 
 SDK 21 / JDK 21 사용
 
 
 # 원본 프로젝트
-https://github.com/didi78579/-
+[원본 프로젝트(Github)](https://github.com/didi78579/-)
 
-# 기본적인 사용법
-https://www.koreaminecraft.net/plugins/3968610
+
+# 아바타 시스템 플러그인 (함께 사용하세요)
+[아바타 시스템 플러그인(Github)](https://github.com/ganwooma/Avatar/tree/main)
+
+
+# 기본적인 사용법 & 업그레이드 플러그인
+[기본적인 사용법 & 업그레이드 플러그인(한마포)](https://www.koreaminecraft.net/plugins/3968610)
+
 
 # 추가된 기능
 ### 가문별 디스코드 채널 설정
-각 가문마다 별도의 디스코드 채널을 설정할 수 있습니다
-/discord set <가문이름> <채널ID> 명령어로 설정 가능
+각 가문마다 별도의 디스코드 채널을 설정할 수 있습니다.
+/discord set <가문이름> <채널ID> 명령어로 설정 가능.
 
 
 ### 비콘 침입 알림
-다른 가문의 플레이어가 비콘 근처(50m 이내)에 접근하면 해당 가문의 디스코드 채널에 알림이 전송됩니다
-게임 내에서도 해당 가문 멤버들에게 알림이 전송됩니다
+다른 가문의 플레이어가 비콘 근처(50m 이내)에 접근하면 해당 가문의 디스코드 채널에 알림이 전송됩니다.
 
-
-### 접속 / 퇴장 알림
-플레이어가 접속하거나 퇴장할 때 소속 가문의 디스코드 채널에 알림이 전송됩니다
+게임 내에서도 해당 가문 멤버들에게 알림이 전송됩니다.
 
 
 ### 서버 시작 / 종료 알림
-서버가 시작되거나 종료될 때 기본 채널에 알림이 전송됩니다
+서버가 시작되거나 종료될 때 기본 채널에 알림이 전송됩니다.
 
 
 ### 엔드 탐험 금지
@@ -45,7 +48,7 @@ https://www.koreaminecraft.net/plugins/3968610
 /EndBlock on|off로 엔드 잠금
 off시 엔더드래곤이 스폰합니다.
 기본적으로 off이므로 엔더드래곤이 잡힌 후에
-알아서 off하십시오
+알아서 off하십시오.
 
 
 ### 명령어 피드백
@@ -66,7 +69,9 @@ F3을 눌렀을 때 Debug Info가 나옵니다.
 
 ### 폭발 방지
 지옥 / 엔드에서 침대가 설치되지 않습니다.
+
 오버월드 / 엔드에서 리스폰 정박기가 설최되지 않습니다.
+
 오버월드 / 지옥 / 엔드에서 엔드 크리스탈이 설최되지 않습니다.
 
 
@@ -78,7 +83,9 @@ F3을 눌렀을 때 Debug Info가 나옵니다.
 가문 최대 수를 6가문에서 10가문으로 늘렸습니다.
 
 # 설정 방법
-src/main/resource/config.yml 설정
+plugins/Beacon_Plugin/config.yml 설정 방법
+
+혹은 빌드 시 src/main/resource/config.yml 설정 방법
 
 ```yml
 discord:
@@ -149,9 +156,9 @@ gradlew shadowJar
 # 플레이
 Simple Voice Chat Mod와 Simple Voice Chat Plugin 사용 권장
 
-CurseForge(mod) URL: https://www.curseforge.com/minecraft/mc-mods/simple-voice-chat
-
 Modrinth(mod and plugin) URL: https://modrinth.com/plugin/simple-voice-chat
+
+CurseForge(mod) URL: https://www.curseforge.com/minecraft/mc-mods/simple-voice-chat
 
 <h1>Made By didi78579 and ChatGPT and Claude</h1>
 and me
