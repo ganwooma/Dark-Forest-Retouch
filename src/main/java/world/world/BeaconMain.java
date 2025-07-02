@@ -14,10 +14,7 @@ import org.bukkit.event.block.BlockPistonExtendEvent;
 import org.bukkit.event.block.BlockPistonRetractEvent;
 import org.bukkit.event.block.BlockPlaceEvent;
 import org.bukkit.event.entity.*;
-import org.bukkit.event.player.PlayerJoinEvent;
-import org.bukkit.event.player.PlayerQuitEvent;
-import org.bukkit.event.player.PlayerRespawnEvent;
-import org.bukkit.event.player.PlayerTeleportEvent;
+import org.bukkit.event.player.*;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.plugin.PluginManager;
 import org.bukkit.plugin.java.JavaPlugin;
@@ -43,8 +40,21 @@ public class BeaconMain extends JavaPlugin implements Listener {
     private Map<String, Location> playerLastTpLocations = new HashMap<>();
     private Set<String> messageSentPlayers = new HashSet<>();
 
+    @EventHandler
+    public void onCommand(PlayerCommandPreprocessEvent event) {
+        String msg = event.getMessage().toLowerCase();
+
+        // 귓속말 명령어 차단: /msg, /w, /tell
+        if (msg.startsWith("/msg ") || msg.startsWith("/w ") || msg.startsWith("/tell ")) {
+            event.setCancelled(true); // 명령어 실행 취소
+            event.getPlayer().sendMessage("§c귓속말은 사용할 수 없습니다."); // 사용자에게 메시지 출력
+        }
+    }
+
     @Override
     public void onEnable() {
+        getServer().getPluginManager().registerEvents(this, this);
+
         saveDefaultConfig();
         FileConfiguration config = getConfig();
         preventEnder = config.getBoolean("preventEnder", true); // 설정 파일에서 preventEnder 값을 불러옴 (기본값 true)
@@ -173,40 +183,6 @@ public class BeaconMain extends JavaPlugin implements Listener {
             player.sendMessage("모든 온라인 플레이어에게 비콘을 지급했습니다.");
             return true;
         }
-
-        if (cmd.getName().equalsIgnoreCase("EndBlock")) {
-            if (args.length == 1 && (args[0].equalsIgnoreCase("on") || args[0].equalsIgnoreCase("off"))) {
-                FileConfiguration config = getConfig();
-                if (args[0].equalsIgnoreCase("on")) {
-                    preventEnder = true;  // 엔더 월드 차단 활성화
-                    config.set("preventEnder", true);
-                    player.sendMessage("엔더 월드 진입 차단이 활성화되었습니다.");
-                    for (World world : Bukkit.getWorlds()) {
-                        for (Entity entity : world.getEntities()) {
-                            if (entity instanceof EnderDragon) {
-                                entity.remove(); // 드래곤 제거
-                            }
-                        }
-                    }
-                    // End 월드에서 0, 100, 0 좌표 설정
-                    Location location = new Location(Bukkit.getWorld("world_the_end"), 0, 100, 0);
-                    // 드래곤 소환
-                    EnderDragon dragon = (EnderDragon) location.getWorld().spawnEntity(location, EntityType.ENDER_DRAGON);
-                    // 드래곤의 HP를 1024로 설정
-                    dragon.getAttribute(Attribute.GENERIC_MAX_HEALTH).setBaseValue(1024);
-                    dragon.setHealth(1024);  // HP를 설정
-                } else {
-                    preventEnder = false;  // 엔더 월드 차단 비활성화
-                    config.set("preventEnder", false);
-                    player.sendMessage("엔더 월드 진입 차단이 비활성화되었습니다.");
-                }
-                saveConfig();  // 설정 파일에 변경 사항 저장
-                return true;
-            }
-            player.sendMessage("사용법: /EndBlock [on/off]");
-            return false;
-        }
-
         return false;
     }
 

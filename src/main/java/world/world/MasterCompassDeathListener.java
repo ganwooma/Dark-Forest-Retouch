@@ -35,44 +35,10 @@ public class MasterCompassDeathListener implements Listener {
                 ItemStack masterCompass = masterCompassManager.createMasterCompass();
                 killer.getInventory().addItem(masterCompass);
                 killer.sendMessage("§6 축하합니다! 엔드 드래곤을 처치하여 마스터 컴퍼스를 획득했습니다!");
+            }
 
-                for (Player player : Bukkit.getServer().getOnlinePlayers()) {
-                    player.sendMessage("§41분 뒤에 엔드에서 나가집니다!!");
-                }
-
-                // 1분 뒤 작업 예약
-                new BukkitRunnable() {
-                    @Override
-                    public void run() {
-                        // End 월드 가져오기
-                        World endWorld = Bukkit.getWorld("world_the_end");
-                        if (endWorld == null) return;
-
-                        // preventEnder 설정 저장
-                        FileConfiguration config = plugin.getConfig();
-                        config.set("preventEnder", true);
-                        plugin.saveConfig();
-
-                        // End에 있는 모든 플레이어 반복
-                        for (Player player : endWorld.getPlayers()) {
-                            FamilyManager.Family family = FamilyManager.getFamily(player.getName());
-
-                            if (family != null) {
-                                Location beaconLocation = family.getBeaconLocation();
-
-                                if (beaconLocation != null) {
-                                    Location respawnLocation = beaconLocation.clone().subtract(1, 0, 0); // 위치 조정
-
-                                    // 아래 블록이 배리어가 아니면 위치 적용
-                                    Location belowLocation = respawnLocation.clone().add(0, -1, 0);
-                                    if (belowLocation.getBlock().getType() != Material.BARRIER) {
-                                        player.setBedSpawnLocation(respawnLocation, true);
-                                    }
-                                }
-                            }
-                        }
-                    }
-                }.runTaskLater(plugin, 20 * 60); // 60초 후 실행 (20틱 * 60 = 1분)
+            for (Player player : Bukkit.getServer().getOnlinePlayers()) {
+                player.sendMessage("§410분 뒤에 엔드가 !!");
             }
         }
     }
